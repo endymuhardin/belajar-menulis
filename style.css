@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #e8e8e8;
+  color: #222;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+/* --- Control Panel --- */
+
+.controls {
+  width: 300px;
+  min-width: 300px;
+  background: #fff;
+  border-right: 1px solid #ccc;
+  padding: 24px 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.controls h1 {
+  font-size: 1.25rem;
+  margin-bottom: 12px;
+}
+
+.control-group {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 16px;
+}
+
+.control-group h2 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.controls label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  margin-top: 10px;
+  color: #444;
+}
+
+.controls label:first-of-type {
+  margin-top: 0;
+}
+
+.controls select,
+.controls input[type="number"],
+.controls textarea {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.controls textarea {
+  resize: vertical;
+  font-family: monospace;
+  font-size: 0.8rem;
+}
+
+.checkbox-label {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  font-weight: 400 !important;
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: auto;
+}
+
+#print-btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: #1a73e8;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#print-btn:hover {
+  background: #1557b0;
+}
+
+.helper-text {
+  font-size: 0.75rem;
+  color: #888;
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+/* --- Preview Area --- */
+
+.preview-area {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.page {
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  flex-shrink: 0;
+  overflow: hidden;
+  padding: 15mm;
+}
+
+.page.a4 {
+  width: 210mm;
+  min-height: 297mm;
+}
+
+.page.letter {
+  width: 215.9mm;
+  min-height: 279.4mm;
+}
+
+/* --- Practice Sheet --- */
+
+.practice-block {
+  margin-bottom: 4px;
+}
+
+.practice-row {
+  position: relative;
+  width: 100%;
+}
+
+.reference-row {
+  background: rgba(0, 0, 0, 0.02);
+}

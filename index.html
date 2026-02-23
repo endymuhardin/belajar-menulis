@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Handwriting Practice Sheet Generator</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+  <div class="app">
+    <aside class="controls">
+      <h1>Handwriting Practice</h1>
+
+      <section class="control-group">
+        <h2>Fonts</h2>
+        <label for="primary-font">Primary Font (Sans)</label>
+        <select id="primary-font"></select>
+
+        <label for="secondary-font">Secondary Font (Mono)</label>
+        <select id="secondary-font"></select>
+      </section>
+
+      <section class="control-group">
+        <h2>Sheet Settings</h2>
+
+        <label for="x-height">x-height (mm)</label>
+        <input type="number" id="x-height" min="2" max="20" value="5">
+
+        <label for="practice-rows">Practice rows per block</label>
+        <input type="number" id="practice-rows" min="1" max="5" value="3">
+
+        <label for="paper-size">Paper size</label>
+        <select id="paper-size">
+          <option value="a4" selected>A4</option>
+          <option value="letter">Letter</option>
+        </select>
+
+        <label for="sheet-type">Sheet type</label>
+        <select id="sheet-type">
+          <option value="alphabet" selected>Alphabet</option>
+          <option value="words">Word Drills</option>
+          <option value="free">Free Composition</option>
+        </select>
+
+        <label class="checkbox-label">
+          <input type="checkbox" id="show-guides" checked>
+          Show color guide lines
+        </label>
+      </section>
+
+      <section class="control-group" id="custom-words-section" hidden>
+        <h2>Custom Words</h2>
+        <label for="custom-words">Word list (one per line)</label>
+        <textarea id="custom-words" rows="4">minimum officious quickly adjacent
+0xFF 127.0.0.1 if (x == null) return;</textarea>
+      </section>
+
+      <section class="control-group">
+        <button id="print-btn" type="button">Print / Save as PDF</button>
+        <p class="helper-text">In browser dialog: set margins to None, disable Headers &amp; Footers</p>
+      </section>
+    </aside>
+
+    <main class="preview-area">
+      <div id="preview" class="page a4"></div>
+    </main>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

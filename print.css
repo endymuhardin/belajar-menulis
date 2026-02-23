@@ -1,0 +1,61 @@
+@media print {
+  /* Hide all UI controls */
+  .controls,
+  .toolbar,
+  nav,
+  header,
+  footer,
+  #print-btn,
+  .helper-text {
+    display: none !important;
+  }
+
+  /* Reset body */
+  body {
+    background: none;
+    margin: 0;
+  }
+
+  .app {
+    display: block;
+    height: auto;
+  }
+
+  /* Preview area loses its padding and centering */
+  .preview-area {
+    padding: 0;
+    overflow: visible;
+    display: block;
+  }
+
+  /* Page element becomes transparent to print layout */
+  .page {
+    box-shadow: none;
+    border-radius: 0;
+    width: auto;
+    min-height: auto;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Page size */
+  @page {
+    size: A4 portrait;
+    margin: 15mm;
+  }
+
+  body.letter-page @page {
+    size: Letter portrait;
+  }
+
+  /* Prevent practice blocks from splitting across pages */
+  .practice-block {
+    break-inside: avoid;
+  }
+
+  /* Force color printing of guide lines */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
