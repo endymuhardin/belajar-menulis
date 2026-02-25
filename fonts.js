@@ -12,6 +12,7 @@ export const FONTS = {
     { name: 'IBM Plex Mono', googleFamily: 'IBM+Plex+Mono', category: 'monospace', notes: 'Matches IBM Plex Sans' },
     { name: 'Fira Code', googleFamily: 'Fira+Code', category: 'monospace', notes: 'Ligatures for code' },
     { name: 'Source Code Pro', googleFamily: 'Source+Code+Pro', category: 'monospace', notes: 'Adobe open source mono' },
+    { name: 'Roboto Mono', googleFamily: 'Roboto+Mono', category: 'monospace', notes: 'Clean geometric mono, mirip Monaco' },
     { name: 'DejaVu Sans Mono', googleFamily: null, category: 'monospace', notes: 'System font fallback, no Google Fonts URL' },
   ],
 };
