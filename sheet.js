@@ -14,7 +14,11 @@ const ALPHABET_ROWS = [
   { text: 'A B C D E F G H I J K L M', font: 'primary' },
   { text: 'N O P Q R S T U V W X Y Z', font: 'primary' },
   { text: '0 1 2 3 4 5 6 7 8 9', font: 'primary' },
-  { text: '0 O  1 l I  5 S  8 B  2 Z  6 G', font: 'secondary' },
+  { text: 'a b c d e f g h i j k l m', font: 'secondary' },
+  { text: 'n o p q r s t u v w x y z', font: 'secondary' },
+  { text: 'A B C D E F G H I J K L M', font: 'secondary' },
+  { text: 'N O P Q R S T U V W X Y Z', font: 'secondary' },
+  { text: '0 1 2 3 4 5 6 7 8 9', font: 'secondary' },
 ];
 
 function createRow(xHeightPx, showGuideLines, fontFamily, text) {
