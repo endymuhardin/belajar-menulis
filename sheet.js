@@ -1,18 +1,20 @@
 const MM_TO_PX = 96 / 25.4;
 
 const GUIDE_LINES = [
-  { name: 'ascender',   color: '#B8D4F0', position: 1.5 },
+  { name: 'ascender', color: '#B8D4F0', position: 1.5 },
   { name: 'cap-height', color: '#C8E6C9', position: 1.3 },
-  { name: 'x-height',   color: '#FFE0B2', position: 1.0 },
-  { name: 'baseline',   color: '#EF9A9A', position: 0 },
-  { name: 'descender',  color: '#E1BEE7', position: -0.5 },
+  { name: 'x-height', color: '#FFE0B2', position: 1.0 },
+  { name: 'baseline', color: '#EF9A9A', position: 0 },
+  { name: 'descender', color: '#E1BEE7', position: -0.5 },
 ];
 
 const ALPHABET_ROWS = [
-  { text: 'a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9', font: 'primary', label: 'Lowercase & Numbers' },
-  { text: 'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 0 1 2 3 4 5 6 7 8 9', font: 'primary', label: 'Uppercase & Numbers' },
-  { text: 'a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9', font: 'secondary', label: 'Lowercase & Numbers' },
-  { text: 'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 0 1 2 3 4 5 6 7 8 9', font: 'secondary', label: 'Uppercase & Numbers' },
+  { text: 'a b c d e f g h i j k l m n o p q r s t u v w x y z', font: 'primary', label: 'Lowercase' },
+  { text: 'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z', font: 'primary', label: 'Uppercase' },
+  { text: '0 1 2 3 4 5 6 7 8 9 ! ? . , : ; ( ) " + - = @ & % #', font: 'primary', label: 'Numbers & Symbols' },
+  { text: 'a b c d e f g h i j k l m n o p q r s t u v w x y z', font: 'secondary', label: 'Lowercase' },
+  { text: 'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z', font: 'secondary', label: 'Uppercase' },
+  { text: '0 1 2 3 4 5 6 7 8 9 ! ? . , : ; ( ) " + - = @ & % #', font: 'secondary', label: 'Numbers & Symbols' },
 ];
 
 function createRow(xHeightPx, showGuideLines, fontFamily, text, isAlphabet = false) {
@@ -89,7 +91,7 @@ function createBlock(config, text, fontType, labelStr = null) {
     const labelEl = document.createElement('div');
     const baseStr = fontType === 'secondary' ? 'Secondary Font' : 'Primary Font';
     labelEl.textContent = `${baseStr}: ${fontFamily}`;
-    
+
     // Create a smaller span for the case label
     const subLabel = document.createElement('span');
     subLabel.textContent = ` — ${labelStr}`;
