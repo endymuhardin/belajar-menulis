@@ -9,19 +9,13 @@ const GUIDE_LINES = [
 ];
 
 const ALPHABET_ROWS = [
-  { text: 'a b c d e f g h i j k l m', font: 'primary' },
-  { text: 'n o p q r s t u v w x y z', font: 'primary' },
-  { text: 'A B C D E F G H I J K L M', font: 'primary' },
-  { text: 'N O P Q R S T U V W X Y Z', font: 'primary' },
-  { text: '0 1 2 3 4 5 6 7 8 9', font: 'primary' },
-  { text: 'a b c d e f g h i j k l m', font: 'secondary' },
-  { text: 'n o p q r s t u v w x y z', font: 'secondary' },
-  { text: 'A B C D E F G H I J K L M', font: 'secondary' },
-  { text: 'N O P Q R S T U V W X Y Z', font: 'secondary' },
-  { text: '0 1 2 3 4 5 6 7 8 9', font: 'secondary' },
+  { text: 'a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9', font: 'primary', label: 'Lowercase & Numbers' },
+  { text: 'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 0 1 2 3 4 5 6 7 8 9', font: 'primary', label: 'Uppercase & Numbers' },
+  { text: 'a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9', font: 'secondary', label: 'Lowercase & Numbers' },
+  { text: 'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 0 1 2 3 4 5 6 7 8 9', font: 'secondary', label: 'Uppercase & Numbers' },
 ];
 
-function createRow(xHeightPx, showGuideLines, fontFamily, text) {
+function createRow(xHeightPx, showGuideLines, fontFamily, text, isAlphabet = false) {
   // Row spans from ascender (+150%) to descender (-50%) = 200% of x-height
   const rowHeight = 2.0 * xHeightPx;
   // Baseline sits at 150% from the top (ascender is at top)
@@ -51,12 +45,11 @@ function createRow(xHeightPx, showGuideLines, fontFamily, text) {
   }
 
   if (text !== null) {
-    const span = document.createElement('span');
+    const span = document.createElement('div');
     span.className = 'row-text';
-    span.textContent = text;
     span.style.cssText = `
       position: absolute;
-      left: 0;
+      left: 0; right: 0;
       bottom: ${0.5 * xHeightPx}px;
       font-family: '${fontFamily}', sans-serif;
       font-size: ${xHeightPx * 1.6}px;
@@ -64,13 +57,27 @@ function createRow(xHeightPx, showGuideLines, fontFamily, text) {
       color: #444;
       white-space: nowrap;
     `;
+
+    if (isAlphabet) {
+      span.style.display = 'flex';
+      span.style.justifyContent = 'space-between';
+      const chars = text.replace(/ /g, '').split('');
+      for (const char of chars) {
+        const charSpan = document.createElement('span');
+        charSpan.textContent = char;
+        span.appendChild(charSpan);
+      }
+    } else {
+      span.textContent = text;
+    }
+
     row.appendChild(span);
   }
 
   return row;
 }
 
-function createBlock(config, text, fontType) {
+function createBlock(config, text, fontType, labelStr = null) {
   const { primaryFont, secondaryFont, xHeightMm, practiceRows, showGuideLines } = config;
   const xHeightPx = xHeightMm * MM_TO_PX;
   const fontFamily = fontType === 'secondary' ? secondaryFont : primaryFont;
@@ -78,9 +85,36 @@ function createBlock(config, text, fontType) {
   const block = document.createElement('div');
   block.className = 'practice-block';
 
+  if (labelStr) {
+    const labelEl = document.createElement('div');
+    const baseStr = fontType === 'secondary' ? 'Secondary Font' : 'Primary Font';
+    labelEl.textContent = `${baseStr}: ${fontFamily}`;
+    
+    // Create a smaller span for the case label
+    const subLabel = document.createElement('span');
+    subLabel.textContent = ` — ${labelStr}`;
+    subLabel.style.cssText = `
+      font-weight: 400;
+      color: #888;
+    `;
+    labelEl.appendChild(subLabel);
+
+    labelEl.style.cssText = `
+      font-size: 0.75rem;
+      color: #444;
+      margin-bottom: 6px;
+      margin-top: 10px;
+      font-family: sans-serif;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    `;
+    block.appendChild(labelEl);
+  }
+
   // Reference row with text
   if (text !== null) {
-    const refRow = createRow(xHeightPx, showGuideLines, fontFamily, text);
+    const refRow = createRow(xHeightPx, showGuideLines, fontFamily, text, config.sheetType === 'alphabet');
     refRow.classList.add('reference-row');
     block.appendChild(refRow);
   }
@@ -102,7 +136,7 @@ export function generateSheet(config) {
 
   if (sheetType === 'alphabet') {
     for (const row of ALPHABET_ROWS) {
-      preview.appendChild(createBlock(config, row.text, row.font));
+      preview.appendChild(createBlock(config, row.text, row.font, row.label));
     }
   } else if (sheetType === 'words') {
     const lines = customWords.split('\n').filter(l => l.trim());
